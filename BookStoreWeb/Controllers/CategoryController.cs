@@ -29,6 +29,10 @@ namespace BookStoreWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category obj)
         {
+            if(obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The DisplayOrder cannot match the Name."); 
+            }
             if(ModelState.IsValid)
             {
                 _repository.CreateCategory(obj);
