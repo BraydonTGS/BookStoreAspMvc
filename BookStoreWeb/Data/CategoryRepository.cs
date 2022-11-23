@@ -15,5 +15,11 @@ namespace BookStoreWeb.Data
         {
             return _context.Categories.ToList(); 
         }
+
+        public void CreateCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+        }
     }
 }

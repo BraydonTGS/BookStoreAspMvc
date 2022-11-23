@@ -1,4 +1,5 @@
 ﻿using BookStoreWeb.Interfaces;
+using BookStoreWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreWeb.Controllers
@@ -17,9 +18,23 @@ namespace BookStoreWeb.Controllers
             return View(categories);
         }
 
+        // Get //
         public IActionResult Create()
         {
             return View();
+        }
+
+        // Post //
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category obj)
+        {
+            if(ModelState.IsValid)
+            {
+                _repository.CreateCategory(obj);
+                return RedirectToAction("Index");
+            }
+            return View(obj);   
         }
     }
 }
