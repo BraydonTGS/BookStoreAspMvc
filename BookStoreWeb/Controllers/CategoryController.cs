@@ -16,5 +16,10 @@ namespace BookStoreWeb.Controllers
             var categories = _repository.GetCategories(); 
             return View(categories);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
