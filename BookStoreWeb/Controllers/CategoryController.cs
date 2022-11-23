@@ -38,6 +38,8 @@ namespace BookStoreWeb.Controllers
             if(ModelState.IsValid)
             {
                 _repository.CreateCategory(obj);
+                // Only stays in data for one redirect //
+                TempData["success"] = "Category Created Successfully"; 
                 return RedirectToAction("Index");
             }
             return View(obj);   
@@ -73,6 +75,7 @@ namespace BookStoreWeb.Controllers
             if (ModelState.IsValid)
             {
                 _repository.UpdateCategory(category);
+                TempData["success"] = "Category Succesfully Updated"; 
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -103,6 +106,7 @@ namespace BookStoreWeb.Controllers
         public IActionResult DeleteCategory(Category category)
         {
                 _repository.DeleteCategory(category);
+              TempData["success"] = "Category Deleted Successfully";
                 return RedirectToAction("Index");
         }
     }
