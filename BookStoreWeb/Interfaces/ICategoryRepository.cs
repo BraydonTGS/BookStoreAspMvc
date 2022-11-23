@@ -10,6 +10,7 @@ namespace BookStoreWeb.Interfaces
 
         public Category GetUpdateCategory(int id);
 
-        public void UpdateCategory(Category category); 
+        public void UpdateCategory(Category category);
+        public void DeleteCategory(Category category); 
     }
 }

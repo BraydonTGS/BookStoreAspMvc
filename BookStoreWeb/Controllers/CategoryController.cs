@@ -13,14 +13,14 @@ namespace BookStoreWeb.Controllers
             _repository = repository;
         }
 
-        // Get //
+        // Get All //
         public IActionResult Index()
         {
             var categories = _repository.GetCategories(); 
             return View(categories);
         }
 
-        // Get //
+        // Get Post //
         public IActionResult Create()
         {
             return View();
@@ -43,7 +43,7 @@ namespace BookStoreWeb.Controllers
             return View(obj);   
         }
 
-        // Get //
+        // Get Update //
         public IActionResult UpdateCategory(int id)
         {
             if (id == 0) 
@@ -76,6 +76,34 @@ namespace BookStoreWeb.Controllers
                 return RedirectToAction("Index");
             }
             return View(category);
+        }
+
+
+        // Get Delete//
+        public IActionResult DeleteCategory(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var category = _repository.GetUpdateCategory(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+
+        }
+
+        // Delete //
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteCategory(Category category)
+        {
+                _repository.DeleteCategory(category);
+                return RedirectToAction("Index");
         }
     }
 }
