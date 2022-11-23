@@ -22,6 +22,9 @@
             <th>
                 Display Order
             </th>
+            <th>
+                Update Category
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +36,11 @@
                 </td>
                 <td width="30%">
                     @c.DisplayOrder
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a class="btn btn-warning mx-2" asp-controller="Category" asp-action="UpdateCategory" asp-route-id="@c.CategoryId">Update</a>
+                    </div>
                 </td>
             </tr>
         }

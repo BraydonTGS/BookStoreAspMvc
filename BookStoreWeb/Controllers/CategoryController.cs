@@ -12,6 +12,8 @@ namespace BookStoreWeb.Controllers
         {
             _repository = repository;
         }
+
+        // Get //
         public IActionResult Index()
         {
             var categories = _repository.GetCategories(); 
@@ -39,6 +41,41 @@ namespace BookStoreWeb.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);   
+        }
+
+        // Get //
+        public IActionResult UpdateCategory(int id)
+        {
+            if (id == 0) 
+            {
+                return NotFound(); 
+            }
+
+            var category = _repository.GetUpdateCategory(id);
+
+            if (category == null)
+            {
+                return NotFound(); 
+            }
+            return View(category);
+
+        }
+
+        // Update //
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateCategory(Category category)
+        {
+            if (category.Name == category.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "The DisplayOrder cannot match the Name.");
+            }
+            if (ModelState.IsValid)
+            {
+                _repository.UpdateCategory(category);
+                return RedirectToAction("Index");
+            }
+            return View(category);
         }
     }
 }

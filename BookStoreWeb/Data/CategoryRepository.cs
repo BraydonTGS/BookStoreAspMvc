@@ -21,5 +21,21 @@ namespace BookStoreWeb.Data
             _context.Categories.Add(category);
             _context.SaveChanges();
         }
+
+        public Category GetUpdateCategory(int id)
+        {
+            var category = _context.Categories.SingleOrDefault(c => c.CategoryId == id);
+            if (category != null)
+            {
+                return category;
+            }
+            return null; 
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+        }
     }
 }
